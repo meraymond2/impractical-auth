@@ -1,3 +1,17 @@
+import React from 'react';
+import InputCapture from '../dev/inputCapture.jsx';
+import renderer from 'react-test-renderer';
+
+test('Authenication should render the correct HTML.', () => {
+  const component = renderer.create(
+    <InputCapture />
+  );
+  let tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+
+
 // import React from 'react';
 // import InputCapture from '../dev/inputCapture.jsx';
 // import renderer from 'react-test-renderer';
