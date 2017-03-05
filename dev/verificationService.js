@@ -3,7 +3,7 @@
 import KeyStroke from './keystroke.js'
 
 export default function verify(kS: KeyStroke[]): Promise<boolean> {
-	
+
 	// If the length is correct,
 	const inputIsValid: boolean = (kS.length == 4) ? (
 		(
@@ -18,6 +18,20 @@ export default function verify(kS: KeyStroke[]): Promise<boolean> {
 			// then it's valid!
 		) ? true : false	
 	) : false;
+
+	if (kS.length == 4) {
+		console.log(kS[0].keyCode == 65);
+		console.log(isShort(kS[0].duration));
+		console.log(kS[1].keyCode == 66); 
+		console.log(isShort(kS[1].duration));
+		console.log(kS[1].start - kS[0].end < 200);
+		console.log(kS[2].keyCode == 67) ;
+		console.log(isLong(kS[2].duration));
+		console.log(kS[2].start - kS[1].end < 200);
+		console.log(kS[3].keyCode == 68) ;
+		console.log(isShort(kS[3].duration));
+		console.log(kS[3].start - kS[2].end > 1000);
+	}
 
 	return new Promise(function(resolve, reject) {
 		if ("everything goes alright with the server call") {

@@ -4,18 +4,21 @@ import React from 'react';
 import KeyStroke from './keystroke.js'
 import verify from './verificationService.js'
 
-type Props = {};
+type Props = {
+	stopAuthenticating: (boolean) => void
+};
 type Event = {
 	keyCode: number,
 	timeStamp: number
 };
 
-export default class EventAuth extends React.Component {
+export default class InputCapture extends React.Component {
 
 	state: {
 		listening: boolean,
 		currentKeyDown: ?Event,
-		keyStrokes: KeyStroke[]
+		keyStrokes: KeyStroke[],
+		glow: boolean
 	}	
 
 	constructor(props: Props) {
@@ -23,7 +26,8 @@ export default class EventAuth extends React.Component {
 	  this.state = {
 	  	listening: true,
 	  	currentKeyDown: undefined,
-	  	keyStrokes: []
+	  	keyStrokes: [],
+	  	glow: false
 	  };
 	}
 
@@ -31,7 +35,8 @@ export default class EventAuth extends React.Component {
 		if (this.state.listening) {
 			this.setState({
 				listening: false,
-				currentKeyDown: {keyCode: event.keyCode, timeStamp: event.timeStamp}
+				currentKeyDown: {keyCode: event.keyCode, timeStamp: event.timeStamp},
+				glow: true
 			});
 		}
 	}
@@ -42,28 +47,32 @@ export default class EventAuth extends React.Component {
 			const newKeyStroke = new KeyStroke(keyDown.keyCode, keyDown.timeStamp, event.timeStamp);
 			const newKeyStrokes = this.state.keyStrokes.concat(newKeyStroke);
 
-			// verify(newKeyStrokes)
-
-			this.setState({
-				listening: true,
-				currentKeyDown: undefined,
-				keyStrokes: newKeyStrokes
-			});
+			verify(newKeyStrokes)
+				.then( verified => {
+					if (verified) {
+						this.props.stopAuthenticating(true);
+					}
+					else {
+						this.setState({
+							listening: true,
+							currentKeyDown: undefined,
+							keyStrokes: newKeyStrokes,
+							glow: false
+						});
+					}
+				});
+		
 		}
 	}
 
 	render(){
 		return (
-			<div style={{
-			height: 100,
-			width: 100,
-			backgroundColor: "teal"
-		}}
-			tabIndex="0"
-			onKeyDown={this.keyDown.bind(this)}
-			onKeyUp={this.keyUp.bind(this)}
-		>			
-			</div>
+			<div id="input-capture" 
+				className={ this.state.glow ? "glow" : "" }
+				tabIndex="0"
+				onKeyDown={this.keyDown.bind(this)}
+				onKeyUp={this.keyUp.bind(this)}
+			/>			
 		);
 	}
 

@@ -1,15 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Wrapper from './wrapper.jsx';
-import InputCapture from './inputCapture.jsx';
+import Authentication from './authentication.jsx';
 
 const Main = (props) => {
 	return (
-    <div>
-      <Wrapper>
-      	<InputCapture />
-      </Wrapper>
-    </div>
+    <Wrapper>
+    	<Authentication />
+    </Wrapper>
 	);
 }
 

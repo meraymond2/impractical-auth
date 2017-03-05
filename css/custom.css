@@ -1,0 +1,34 @@
+#auth-box {
+	height: 300px;
+	width: 70%;
+	margin-left: 15%;
+	margin-top: 10%;
+}
+
+#input-box {
+	height: 75%;
+}
+
+.btn {
+	margin-left: 5%;
+}
+
+#input-capture {
+	width: 200px;
+	height: 200px;
+	margin-left: 5%;
+	border: 1px solid black;
+	border-radius: 100%;
+}
+
+.glow {
+	box-shadow: 0px 0px 25px teal;
+	transition: box-shadow 0.1s ease;
+	background-color: rgba(0, 128, 128, 0.4);
+	transition: background-color 0.9s ease;
+}
+
+#success-text {
+	color: rgb(0, 255, 0);
+	margin-left: 5%;
+}
