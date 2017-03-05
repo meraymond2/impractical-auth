@@ -42,9 +42,7 @@ export default class EventAuth extends React.Component {
 			const newKeyStroke = new KeyStroke(keyDown.keyCode, keyDown.timeStamp, event.timeStamp);
 			const newKeyStrokes = this.state.keyStrokes.concat(newKeyStroke);
 
-			verify(newKeyStrokes)
-				.then( answer => answer ? alert("good!") : null )
-				.catch( () => alert("ERROR!!!" ))
+			// verify(newKeyStrokes)
 
 			this.setState({
 				listening: true,
