@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Do the thing. 1`] = `
+<p
+  onClick={[Function]}
+>
+  I'm going to be the input capture thingy...
+</p>
+`;
