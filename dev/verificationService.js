@@ -19,20 +19,7 @@ export default function verify(kS: KeyStroke[]): Promise<boolean> {
 		) ? true : false	
 	) : false;
 
-	if (kS.length == 4) {
-		console.log(kS[0].keyCode == 65);
-		console.log(isShort(kS[0].duration));
-		console.log(kS[1].keyCode == 66); 
-		console.log(isShort(kS[1].duration));
-		console.log(kS[1].start - kS[0].end < 200);
-		console.log(kS[2].keyCode == 67) ;
-		console.log(isLong(kS[2].duration));
-		console.log(kS[2].start - kS[1].end < 200);
-		console.log(kS[3].keyCode == 68) ;
-		console.log(isShort(kS[3].duration));
-		console.log(kS[3].start - kS[2].end > 1000);
-	}
-
+	// returns promise because it's mocking a server call
 	return new Promise(function(resolve, reject) {
 		if ("everything goes alright with the server call") {
 		  resolve(inputIsValid);
@@ -58,7 +45,7 @@ function isLong(duration: number): boolean {
 	1. short a
 	2. short b
 	3. long c
-	---wait
+	---wait---
 	4. short d
 
 */
